@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>ZephyrBank</artifactId>
+		<groupId>net.byonder</groupId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<groupId>net.byonder</groupId>
+	<artifactId>ZephyrBank-ear</artifactId>
+	<packaging>ear</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>ZephyrBank-ear JavaEE6 Assembly</name>
+	<url>http://maven.apache.org</url>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<configuration>
+					<generateApplicationXml>true</generateApplicationXml>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<finalName>ZephyrBank-ear</finalName>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+						</manifest>
+					</archive>
+
+					<modules>
+						<webModule>
+							<groupId>net.byonder</groupId>
+							<artifactId>ZephyrBank-web</artifactId>
+						</webModule>
+
+						<ejbModule>
+							<groupId>net.byonder</groupId>
+							<artifactId>ZephyrBank-ejb</artifactId>
+						</ejbModule>
+					</modules>
+
+					<jboss>
+						<version>5</version>
+
+						<data-sources>
+							<data-source>zephyr-ds.xml</data-source>
+						</data-sources>
+					</jboss>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-app-ds-xml</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources</directory>
+									<filtering>true</filtering>
+									<includes>
+										<include>zephyr-ds.xml</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>net.byonder</groupId>
+			<artifactId>ZephyrBank-ejb</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>net.byonder</groupId>
+			<artifactId>ZephyrBank-web</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>war</type>
+		</dependency>
+	</dependencies>
+</project>

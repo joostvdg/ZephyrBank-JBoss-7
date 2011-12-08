@@ -1,0 +1,17 @@
+Requirements:
+* JBoss as 7.0.1 or higher
+* MySql 5.x server
+* MySql 5.x driver jar
+* Maven 3.0.3 or higher
+* 
+
+Installatie (Jboss standalone):
+* Installeer MySql
+ * database zephyrbank
+ * gebruiker zephyrbank met ww zephyrbank
+* Installeer JBoss
+ * kopieer mysql driver naar /$JBOSS_HOME/standalone/deployments/
+ * maak datasource aan voor zephyrbank db met mysql driver
+* Bouw applicatie (mvn clean install)
+ * kopieer ear file naar /$JBOSS_HOME/standalone/deployments/
+

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="body">
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Rekening Van" for="rekeningVan" />
+				<h:selectOneMenu id="rekeningVan" 
+					value="#{boekingenBean.rekeningVan}">
+					<f:selectItems value="#{rekeningBean.rekeningen}" var="rekening"
+						itemValue="#{rekening.id}" itemLabel="#{rekening.id}"
+						itemLabelEscaped="true"
+						noSelectionValue="#{rekeningenBean.rekeningen[0]}" />
+				</h:selectOneMenu>
+
+				<h:outputLabel value="Rekening Naar" for="rekeningNaar" />
+				<h:selectOneMenu id="rekeningNaar"
+					value="#{boekingenBean.rekeningNaar}">
+					<f:selectItems value="#{rekeningBean.rekeningen}" var="rekening"
+						itemValue="#{rekening.id}" itemLabel="#{rekening.id}"
+						itemLabelEscaped="true"
+						noSelectionValue="#{rekeningenBean.rekeningen[1]}" />
+				</h:selectOneMenu>
+
+				<h:outputLabel value="Bedrag" for="bedrag" />
+				<h:inputText id="bedrag" value="#{boekingenBean.bedrag}" />
+
+				<h:outputLabel value="" for="rekeningVan" />
+				<h:panelGroup>
+					<h:panelGrid columns="3">
+						<h:commandButton action="#{boekingenBean.storten}" value="Storten" />
+						<h:commandButton action="#{boekingenBean.opnemen}" value="Opnemen" />
+						<h:commandButton action="#{boekingenBean.overboeken}"
+							value="overboeken" />
+					</h:panelGrid>
+				</h:panelGroup>
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

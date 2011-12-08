@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="body">
+		<h:form>
+
+
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Start Saldo" for="saldoInput" />
+				<h:inputText id="saldoInput" value="#{rekeningBean.saldo}" />
+
+				<h:outputLabel value="Type Rekening" for="rekeningTypeInput" />
+				<h:selectOneMenu value="#{rekeningBean.typeRekening}">
+					<f:selectItem itemLabel="Krediet Rekening" itemValue="krediet" />
+					<f:selectItem itemLabel="Spaar Rekening" itemValue="spaar" />
+				</h:selectOneMenu>
+
+				<h:outputText value="Gebruiker naam" />
+				<h:panelGroup>
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Voornaam" for="voornaamInput" />
+						<h:inputText id="voornaamInput"
+							value="#{rekeningBean.tempGebruiker.voorNaam}" />
+
+						<h:outputLabel value="Tussenvoegsel" for="tussenvoegselInput" />
+						<h:inputText id="tussenvoegselInput"
+							value="#{rekeningBean.tempGebruiker.tussenVoegsel}" />
+
+						<h:outputLabel value="Achternaam" for="achternaamInput" />
+						<h:inputText id="achternaamInput"
+							value="#{rekeningBean.tempGebruiker.achterNaam}" />
+					</h:panelGrid>
+				</h:panelGroup>
+
+				<h:outputLabel value="" for="opslaanKnop" />
+				<h:commandButton id="opslaanKnop"
+					action="#{rekeningBean.nieuweRekening}" value="Maak aan" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
